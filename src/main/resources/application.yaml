@@ -1,0 +1,40 @@
+server:
+  port: 8080
+#  servlet:
+#    context-path: /pet
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=WebBanThuCung;encrypt=false
+    username: sa
+    password: 123456789
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.SQLServerDialect
+  hibernate:
+    ddl-auto: update
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.SQLServerDialect
+
+#  spring:
+#    datasource:
+#      url: "jdbc:mysql://localhost:3306/WebBanThuCung"
+#      username: root
+#      password: root
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    database-platform: org.hibernate.dialect.MySQLDialect
+#  hibernate:
+#      ddl-auto: update
+#  properties:
+#    hibernate:
+#      dialect: org.hibernate.dialect.MySQLDialect
+
+#jwt:
+#  signerKey: "fqqWWh6OT+c49kLEbAL5FnWKt/7TZ0yjS+ZFPoMSV/gltKBzR2RjlTrhucriSwe9"
