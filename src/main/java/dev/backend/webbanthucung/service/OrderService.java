@@ -38,7 +38,7 @@ public class OrderService {
 
         int nextNumber = 1;
         if(latestOrderId != null){
-            // Tách số thứ tự từ order_id cuối cùng (VD: DH18032025-003 => 3)
+            // Tách số thứ tự từ order_id cuối cùng
             String lastNumberStr = latestOrderId.substring(latestOrderId.lastIndexOf('-') + 1);
             nextNumber = Integer.parseInt(lastNumberStr) + 1;
         }
