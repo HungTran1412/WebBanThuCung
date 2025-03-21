@@ -19,13 +19,13 @@ public class ContactController {
     ContactService contactService;
 
     //Gui lien he
-    @PostMapping("/contact")
+    @PostMapping("/contacts")
     Contact saveContact(@RequestBody ContactRequest request) {
         return contactService.saveContact(request);
     }
 
     //Lay thong tin tat ca lien he
-    @GetMapping("/contact")
+    @GetMapping("/contacts")
     List<Contact> getAllContact() {
         return contactService.getAllContact();
     }
