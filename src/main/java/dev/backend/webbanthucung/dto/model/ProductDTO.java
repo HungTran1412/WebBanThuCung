@@ -15,6 +15,6 @@ public class ProductDTO {
     Integer price;
     Integer quantity;
     String img;
-    String description;
-    String breed;
+    String des;
+    String gender;
 }

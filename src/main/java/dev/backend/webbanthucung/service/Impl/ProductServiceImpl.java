@@ -42,9 +42,9 @@ public class ProductServiceImpl implements ProductService {
             a.setPrice(x.getPrice());
             a.setName(x.getName());
             a.setId(x.getId());
-            a.setDescription(x.getDescription());
+            a.setDes(x.getDes());
             a.setQuantity(x.getQuantity());
-            a.setBreed(x.getBreed());
+            a.setGender(x.getGender());
 
             listProductDTO.add(a);
         }

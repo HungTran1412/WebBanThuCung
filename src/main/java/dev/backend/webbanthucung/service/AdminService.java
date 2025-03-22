@@ -11,8 +11,8 @@ public class AdminService {
     @Autowired
     private AdminRepository adminRepository;
 
-    public boolean login(String username, String password) {
-        Admin admin = adminRepository.findByUsername(username);
+    public boolean login(String email, String password) {
+        Admin admin = adminRepository.findByEmail(email);
         if (admin != null && admin.getPassword().equals(password)) {
             return true; // Đăng nhập thành công
         }

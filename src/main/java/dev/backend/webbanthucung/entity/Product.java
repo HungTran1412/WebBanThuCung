@@ -33,8 +33,8 @@ public class Product {
     String img;
 
     @Column(name ="description",columnDefinition = "NVARCHAR(255)")
-    String description;
+    String des;
 
     @Column(name ="breed",columnDefinition = "NVARCHAR(10)")
-    String breed;
+    String gender;
 }

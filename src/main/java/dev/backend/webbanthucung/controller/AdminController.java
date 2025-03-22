@@ -16,7 +16,7 @@ public class AdminController {
 
     @PostMapping("/login")
     public boolean login(@RequestBody AdminLoginRequest request) {
-        if (adminService.login(request.getUsername(), request.getPassword())) {
+        if (adminService.login(request.getEmail(), request.getPassword())) {
             ResponseEntity.ok("Đăng nhập thành công!");
             return true;
         } else {
