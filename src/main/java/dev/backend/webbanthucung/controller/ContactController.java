@@ -12,7 +12,6 @@ import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/admin")
 @RestController
 public class ContactController {
     @Autowired
@@ -25,7 +24,7 @@ public class ContactController {
     }
 
     //Lay thong tin tat ca lien he
-    @GetMapping("/contacts")
+    @GetMapping("/admin/contacts")
     public List<Contact> getAllContact() {
         return contactService.getAllContact();
     }
