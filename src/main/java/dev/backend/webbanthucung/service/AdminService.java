@@ -13,9 +13,11 @@ public class AdminService {
 
     public boolean login(String email, String password) {
         Admin admin = adminRepository.findByEmail(email);
+        boolean result;
         if (admin != null && admin.getPassword().equals(password)) {
-            return true; // Đăng nhập thành công
+            return true;// Đăng nhập thành công
+        } else {
+            return false;
         }
-        return false; // Sai tài khoản hoặc mật khẩu
     }
 }
