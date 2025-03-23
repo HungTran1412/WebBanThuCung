@@ -55,4 +55,23 @@ public class ProductServiceImpl implements ProductService {
 
         return pageProduct;
     }
+
+//    public Product addProduct(ProductDTO productDTO) {
+//        Product prod = new Product();
+//
+//        try {
+//            prod.setAge(productDTO.getAge());
+//            prod.setPrice(productDTO.getPrice());
+//            prod.setName(productDTO.getName());
+//            prod.setId(productDTO.getId());
+//            prod.setDes(productDTO.getDes());
+//            prod.setQuantity(productDTO.getQuantity());
+//            prod.setGender(productDTO.getGender());
+//
+//            return productsRepository.save(prod);
+//        } catch (Exception e) {
+//            System.out.println("Loi! khong them duoc san pham");
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

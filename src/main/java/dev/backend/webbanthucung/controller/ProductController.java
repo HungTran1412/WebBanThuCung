@@ -12,11 +12,14 @@ public class ProductController {
     private ProductService productService;
 
     @CrossOrigin(origins = "http://127.0.0.1:5500", methods = { RequestMethod.GET, RequestMethod.POST })
-    @GetMapping(value = "/product")
+    @GetMapping(value = "/products")
     public PageProductDTO testAPI(@RequestParam(value="limit",required=false) Integer limit , @RequestParam(value="skip",required=false) Integer skip) {
 
         PageProductDTO an = productService.productsDTO(limit,skip);
         return an;
 
     }
+
+//    @PostMapping(value = "/products")
+//    public PageProductDTO addPr
 }
