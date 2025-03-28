@@ -79,10 +79,12 @@ public class OrderService {
             Product product = productRepository.findById(detail.getProductId())
                     .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm: " + detail.getProductId()));
 
-            // Quan trọng: Gán order vào OrderDetail!
+            //Gán order vào OrderDetail!
             return new OrderDetail(order, product, 1, product.getPrice());
         }).collect(Collectors.toList());
 
+
+        //tính tổng tiền
         double totalPrice = 0;
         for (OrderDetail orderDetail : orderDetails) {
             totalPrice += orderDetail.getPrice();
