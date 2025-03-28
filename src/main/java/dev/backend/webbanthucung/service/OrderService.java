@@ -1,6 +1,7 @@
 package dev.backend.webbanthucung.service;
 
 import dev.backend.webbanthucung.dto.request.OrderRequest;
+import dev.backend.webbanthucung.dto.respone.OrderRespone;
 import dev.backend.webbanthucung.entity.Order;
 import dev.backend.webbanthucung.entity.OrderDetail;
 import dev.backend.webbanthucung.repository.OrderDetailRepository;
@@ -81,6 +82,22 @@ public class OrderService {
         }
 
         return order;
+    }
+
+    //Ham lay tat ca don hang
+    public List<OrderRespone> getAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+
+        return orders.stream().map(order -> new OrderRespone(
+                order.getOrderId(),
+                order.getOrderDate(),
+                order.getFullName(),
+                order.getEmail(),
+                order.getPhone(),
+                order.getAddress(),
+                order.getTotalAmount(),
+                order.getStatus()
+                )).collect(Collectors.toList());
     }
 
 }
