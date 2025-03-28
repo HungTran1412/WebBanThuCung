@@ -1,7 +1,7 @@
 # Monito Shop API
 
 ## Giới Thiệu
-Đây là API backend cho website bán thú cưng, được xây dựng bằng Spring Boot. API cung cấp các chức năng quản lý thú cưng, danh mục, đơn hàng, và khách hàng.
+Đây là API backend cho website bán thú cưng, được xây dựng bằng Spring Boot. API cung cấp các chức năng quản lý thú cưng, danh mục, đơn hàng.
 
 ## Công Nghệ Sử Dụng
 - **Spring Boot** (Spring MVC, Spring Data JPA)

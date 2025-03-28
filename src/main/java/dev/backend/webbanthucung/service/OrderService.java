@@ -26,6 +26,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,9 @@ public class OrderService {
 
     @Autowired
     OrderRepository orderRepository;
+
+    @Autowired
+    OrderDetailRepository orderDetailRepository;
 
     @Autowired
     ProductRepository productRepository;
@@ -98,7 +102,19 @@ public class OrderService {
     }
 
 
-    //Ham xem chi tiet hoa don
+    //Ham huy don hang
+    @Transactional
+    public void cancelOrder(String orderId) {
+        Optional<Order> order = orderRepository.findById(orderId);
+        if(order.isEmpty()) throw new RuntimeException("Không tìm thấy ID đơn hàng: " + orderId);
+
+        Order order1 = order.get();
+
+        orderDetailRepository.deleteByOrder(order1);
+//        order1.setStatus("CANCELLED");
+//        orderRepository.save(order1);
+        orderRepository.delete(order1);
+    }
 
 
     //Ham lay don hang theo id

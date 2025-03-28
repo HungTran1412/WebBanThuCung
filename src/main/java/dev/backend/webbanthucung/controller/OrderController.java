@@ -52,5 +52,10 @@ public class OrderController {
     public Order approveOrder(@PathVariable("orderId") String orderId, @RequestBody PendingOrderRequest request) {
         return orderService.approveOrder(orderId, request);
     }
-    
+
+    @DeleteMapping("/admin/order/{orderId}")
+    public ResponseEntity<String> deleteContact(@PathVariable("orderId") String orderId) {
+        orderService.cancelOrder(orderId);
+        return ResponseEntity.ok("Đã hủy đơn hàng thành công!");
+    }
 }
