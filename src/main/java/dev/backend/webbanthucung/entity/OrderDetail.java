@@ -19,7 +19,7 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
     @JsonIgnore
-    Order order; // Quan trọng!
+    Order order;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
