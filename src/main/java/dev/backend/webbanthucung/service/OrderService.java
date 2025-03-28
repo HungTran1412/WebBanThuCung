@@ -1,6 +1,7 @@
 package dev.backend.webbanthucung.service;
 
 import dev.backend.webbanthucung.dto.request.OrderRequest;
+import dev.backend.webbanthucung.dto.request.PendingOrderRequest;
 import dev.backend.webbanthucung.dto.respone.OrderRespone;
 import dev.backend.webbanthucung.entity.Order;
 import dev.backend.webbanthucung.entity.OrderDetail;
@@ -11,7 +12,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -86,8 +89,8 @@ public class OrderService {
 
     //Ham lay don hang theo id
     public Order getOrderById(String orderId) {
-        return orderRepository.findById(orderId).orElseThrow(() ->
-                new RuntimeException("Không tìm thấy ID đơn hàng cho orderId: " + orderId));
+        return orderRepository.findById(orderId).orElseThrow(()
+                -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy ID đơn hàng: " + orderId));
     }
 
     //Ham lay tat ca don hang
@@ -104,5 +107,14 @@ public class OrderService {
                 order.getTotalAmount(),
                 order.getStatus()
                 )).collect(Collectors.toList());
+    }
+
+    //Ham xu ly don hang
+    public Order approveOrder(String id, PendingOrderRequest request) {
+        Order order = getOrderById(id);
+
+        order.setStatus(request.getStatus());
+
+        return orderRepository.save(order);
     }
 }

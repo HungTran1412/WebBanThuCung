@@ -1,6 +1,7 @@
 package dev.backend.webbanthucung.controller;
 
 import dev.backend.webbanthucung.dto.request.OrderRequest;
+import dev.backend.webbanthucung.dto.request.PendingOrderRequest;
 import dev.backend.webbanthucung.dto.respone.OrderRespone;
 import dev.backend.webbanthucung.entity.Order;
 import dev.backend.webbanthucung.service.OrderService;
@@ -42,4 +43,9 @@ public class OrderController {
         return orderService.getOrderById(orderId);
     }
 
+    @PutMapping("/admin/order/{orderId}")
+    public Order approveOrder(@PathVariable("orderId") String orderId, @RequestBody PendingOrderRequest request) {
+        return orderService.approveOrder(orderId, request);
+    }
+    
 }
