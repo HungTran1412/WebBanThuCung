@@ -1,12 +1,14 @@
 package dev.backend.webbanthucung.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -39,8 +41,9 @@ public class Order {
     @Column(name = "address")
     String address;
 
+    @JsonSerialize(using = ToStringSerializer.class)
     @Column(name = "total_amount")
-    Double totalAmount;
+    BigDecimal totalAmount;
 
     @Column(name = "status")
     String status;

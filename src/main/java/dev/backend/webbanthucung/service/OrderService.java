@@ -20,6 +20,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -68,7 +70,7 @@ public class OrderService {
         order.setEmail(request.getEmail());
         order.setPhone(request.getPhone());
         order.setAddress(request.getAddress());
-        order.setTotalAmount(request.getTotalAmount());
+
         order.setOrderDate(LocalDate.now());
         order.setStatus("PENDING");
 
@@ -81,9 +83,14 @@ public class OrderService {
             return new OrderDetail(order, product, 1, product.getPrice());
         }).collect(Collectors.toList());
 
+        double totalPrice = 0;
+        for (OrderDetail orderDetail : orderDetails) {
+            totalPrice += orderDetail.getPrice();
+        }
+
         //Gán danh sách OrderDetail vào Order
         order.setOrderDetails(orderDetails);
-
+        order.setTotalAmount(BigDecimal.valueOf(totalPrice).setScale(2, RoundingMode.HALF_UP));
 
         return orderRepository.save(order);
     }

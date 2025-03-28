@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -19,6 +20,6 @@ public class OrderRespone {
     String email;
     String phone;
     String address;
-    Double totalAmount;
+    BigDecimal totalAmount;
     String status;
 }
