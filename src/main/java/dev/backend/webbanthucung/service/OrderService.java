@@ -60,8 +60,9 @@ public class OrderService {
 
     //Ham tao don hang
     public Order createOrder(OrderRequest request) {
-        // 1️⃣ Tạo Order mới
+        //Tạo Order mới
         Order order = new Order();
+
         order.setOrderId(generateOrderId());
         order.setFullName(request.getFullName());
         order.setEmail(request.getEmail());
@@ -71,19 +72,19 @@ public class OrderService {
         order.setOrderDate(LocalDate.now());
         order.setStatus("PENDING");
 
-        // 2️⃣ Tạo danh sách OrderDetail
+        //Tạo danh sách OrderDetail
         List<OrderDetail> orderDetails = request.getOrderDetail().stream().map(detail -> {
             Product product = productRepository.findById(detail.getProductId())
                     .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm: " + detail.getProductId()));
 
             // Quan trọng: Gán order vào OrderDetail!
-            return new OrderDetail(order, product, detail.getQuantity(), product.getPrice());
+            return new OrderDetail(order, product, 1, product.getPrice());
         }).collect(Collectors.toList());
 
-        // 3️⃣ Gán danh sách OrderDetail vào Order
+        //Gán danh sách OrderDetail vào Order
         order.setOrderDetails(orderDetails);
 
-        // 4️⃣ Lưu vào database (Hibernate sẽ tự động lưu OrderDetail)
+
         return orderRepository.save(order);
     }
 
