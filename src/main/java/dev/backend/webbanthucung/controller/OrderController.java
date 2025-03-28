@@ -35,4 +35,11 @@ public class OrderController {
     public List<OrderRespone> getAllOrders() {
         return orderService.getAllOrders();
     }
+
+    //Lay don hang theo id
+    @GetMapping("/admin/order/{orderId}")
+    public Order getOrderById(@PathVariable("orderId") String orderId) {
+        return orderService.getOrderById(orderId);
+    }
+
 }

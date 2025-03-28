@@ -84,6 +84,12 @@ public class OrderService {
         return order;
     }
 
+    //Ham lay don hang theo id
+    public Order getOrderById(String orderId) {
+        return orderRepository.findById(orderId).orElseThrow(() ->
+                new RuntimeException("Không tìm thấy ID đơn hàng cho orderId: " + orderId));
+    }
+
     //Ham lay tat ca don hang
     public List<OrderRespone> getAllOrders() {
         List<Order> orders = orderRepository.findAll();
@@ -99,5 +105,4 @@ public class OrderService {
                 order.getStatus()
                 )).collect(Collectors.toList());
     }
-
 }
