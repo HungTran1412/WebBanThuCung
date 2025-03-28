@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderDetailRequest {
-    String productId;
+    int productId;
     int quantity;
     double price;
 }

@@ -13,5 +13,4 @@ public interface OrderRepository extends JpaRepository<Order, String> {
             nativeQuery = true)
     String findLastOrderId(@Param("datePart") String datePart);
 
-    Order findByOrderId(String orderId);
 }

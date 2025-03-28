@@ -18,11 +18,13 @@ public class OrderDetail {
     @Column(name = "order_detail_id")
     String orderDetailId;
 
-    @Column(name = "order_id")
-    String orderId;
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    Order orderId;
 
-    @Column(name = "product_id")
-    String product_id;
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
+    Product product_id;
 
     @Column(name = "quantity")
     int quantity;
@@ -30,10 +32,9 @@ public class OrderDetail {
     @Column(name = "price")
     double price;
 
-    public OrderDetail(String orderId, String product_id, int quantity, double price) {
-        this.orderId = orderId;
+    public OrderDetail(Order orderId, Product product_id, double price) {
         this.product_id = product_id;
-        this.quantity = quantity;
+        this.orderId = orderId;
         this.price = price;
     }
 }

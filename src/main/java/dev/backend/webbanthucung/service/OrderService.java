@@ -5,8 +5,11 @@ import dev.backend.webbanthucung.dto.request.PendingOrderRequest;
 import dev.backend.webbanthucung.dto.respone.OrderRespone;
 import dev.backend.webbanthucung.entity.Order;
 import dev.backend.webbanthucung.entity.OrderDetail;
+import dev.backend.webbanthucung.entity.Product;
 import dev.backend.webbanthucung.repository.OrderDetailRepository;
 import dev.backend.webbanthucung.repository.OrderRepository;
+import dev.backend.webbanthucung.repository.ProductRepository;
+import dev.backend.webbanthucung.repository.PromotionRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -33,6 +36,9 @@ public class OrderService {
     @Autowired
     OrderDetailRepository orderDetailRepository;
 
+    @Autowired
+    ProductRepository productRepository;
+
     public String generateOrderId() {
         //lay ngay hien tai
         String datePart = LocalDate.now().format(DateTimeFormatter.ofPattern("ddMMyyyy"));
@@ -41,7 +47,7 @@ public class OrderService {
         String latestOrderId = orderRepository.findLastOrderId(datePart);
 
         int nextNumber = 1;
-        if(latestOrderId != null){
+        if (latestOrderId != null) {
             // Tách số thứ tự từ order_id cuối cùng
             String lastNumberStr = latestOrderId.substring(latestOrderId.lastIndexOf('-') + 1);
             nextNumber = Integer.parseInt(lastNumberStr) + 1;
@@ -72,20 +78,24 @@ public class OrderService {
 
         // Kiểm tra orderDetail có null không
         if (request.getOrderDetail() != null && !request.getOrderDetail().isEmpty()) {
-            // Tạo danh sách OrderDetail từ danh sách sản phẩm đặt hàng
             List<OrderDetail> orderDetails = request.getOrderDetail().stream()
-                    .map(detail -> new OrderDetail(newOrderId, detail.getProductId(),
-                            detail.getQuantity(), detail.getPrice()))
+                    .map(detail -> {
+                        // Lấy product từ database để đảm bảo product_id hợp lệ
+                        Product product = productRepository.findById(detail.getProductId())
+                                .orElseThrow(() -> new RuntimeException("Không tìm thấy product_id: " + detail.getProductId()));
+
+                        return new OrderDetail(order, product, detail.getPrice());
+                    })
                     .collect(Collectors.toList());
 
             // Lưu tất cả chi tiết đơn hàng vào database
             orderDetailRepository.saveAll(orderDetails);
-        } else {
-            log.warn("OrderDetail is null or empty for orderId: {}", newOrderId);
         }
-
         return order;
     }
+
+    //Ham xem chi tiet hoa don
+
 
     //Ham lay don hang theo id
     public Order getOrderById(String orderId) {
@@ -106,7 +116,7 @@ public class OrderService {
                 order.getAddress(),
                 order.getTotalAmount(),
                 order.getStatus()
-                )).collect(Collectors.toList());
+        )).collect(Collectors.toList());
     }
 
     //Ham xu ly don hang
