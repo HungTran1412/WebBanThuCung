@@ -19,6 +19,9 @@ spring:
     properties:
       hibernate:
       dialect: org.hibernate.dialect.SQLServerDialect
+  properties:
+    hibernate:
+      format_sql: true
 
 #  spring:
 #    datasource:

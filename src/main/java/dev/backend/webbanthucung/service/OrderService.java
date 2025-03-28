@@ -10,6 +10,7 @@ import dev.backend.webbanthucung.repository.OrderDetailRepository;
 import dev.backend.webbanthucung.repository.OrderRepository;
 import dev.backend.webbanthucung.repository.ProductRepository;
 import dev.backend.webbanthucung.repository.PromotionRepository;
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,8 +21,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -32,9 +35,6 @@ public class OrderService {
 
     @Autowired
     OrderRepository orderRepository;
-
-    @Autowired
-    OrderDetailRepository orderDetailRepository;
 
     @Autowired
     ProductRepository productRepository;
@@ -57,42 +57,36 @@ public class OrderService {
         return String.format("ORD%s-%03d", datePart, nextNumber);
     }
 
+
     //Ham tao don hang
     public Order createOrder(OrderRequest request) {
-        String newOrderId = generateOrderId();
-
+        // 1️⃣ Tạo Order mới
         Order order = new Order();
-
-        // Thiet lap du lieu
-        order.setOrderId(newOrderId);
-        order.setOrderDate(LocalDate.now());
+        order.setOrderId(generateOrderId());
         order.setFullName(request.getFullName());
         order.setEmail(request.getEmail());
         order.setPhone(request.getPhone());
         order.setAddress(request.getAddress());
         order.setTotalAmount(request.getTotalAmount());
+        order.setOrderDate(LocalDate.now());
         order.setStatus("PENDING");
 
-        // Luu vao database
-        orderRepository.save(order);
+        // 2️⃣ Tạo danh sách OrderDetail
+        List<OrderDetail> orderDetails = request.getOrderDetail().stream().map(detail -> {
+            Product product = productRepository.findById(detail.getProductId())
+                    .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm: " + detail.getProductId()));
 
-        // Kiểm tra orderDetail có null không
-        if (request.getOrderDetail() != null && !request.getOrderDetail().isEmpty()) {
-            List<OrderDetail> orderDetails = request.getOrderDetail().stream()
-                    .map(detail -> {
-                        // Lấy product từ database để đảm bảo product_id hợp lệ
-                        Product product = productRepository.findById(detail.getProductId())
-                                .orElseThrow(() -> new RuntimeException("Không tìm thấy product_id: " + detail.getProductId()));
+            // Quan trọng: Gán order vào OrderDetail!
+            return new OrderDetail(order, product, detail.getQuantity(), product.getPrice());
+        }).collect(Collectors.toList());
 
-                        return new OrderDetail(order, product, detail.getPrice());
-                    })
-                    .collect(Collectors.toList());
+        // 3️⃣ Gán danh sách OrderDetail vào Order
+        order.setOrderDetails(orderDetails);
 
-            // Lưu tất cả chi tiết đơn hàng vào database
-            orderDetailRepository.saveAll(orderDetails);
-        }
-        return order;
+        // 4️⃣ Lưu vào database (Hibernate sẽ tự động lưu OrderDetail)
+        return orderRepository.save(order);
     }
+
 
     //Ham xem chi tiet hoa don
 

@@ -1,5 +1,6 @@
 package dev.backend.webbanthucung.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -8,33 +9,37 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "order_detail")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderDetail {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "order_detail_id")
-    String orderDetailId;
+    String order_detail_id;
 
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
-    Order orderId;
+    @JsonIgnore
+    Order order; // Quan trọng!
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
-    Product product_id;
+    Product product;
 
-    @Column(name = "quantity")
+    @Column(nullable = false)
     int quantity;
 
-    @Column(name = "price")
+    @Column(nullable = false)
     double price;
 
-    public OrderDetail(Order orderId, Product product_id, double price) {
-        this.product_id = product_id;
-        this.orderId = orderId;
+    // Constructor đầy đủ
+    public OrderDetail(Order order, Product product, int quantity, double price) {
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
         this.price = price;
+    }
+
+    public OrderDetail() {
+
     }
 }

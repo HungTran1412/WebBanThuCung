@@ -21,16 +21,17 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
     //Tao don hang
-    @PostMapping("/order")
+    @PostMapping("/orders")
     public ResponseEntity<Order> createOrder(@RequestBody OrderRequest request) {
-        Order newOrder = orderService.createOrder(request);
-        return ResponseEntity.ok(newOrder);
+        return ResponseEntity.ok(orderService.createOrder(request));
     }
+
 
 //    @GetMapping("/orderDetail")
 //    public OrderDetail getOrderDetail(@RequestParam String orderId) {}
