@@ -49,13 +49,13 @@ mvn spring-boot:run
 Ứng dụng sẽ chạy trên `http://localhost:8080`
 
 ## Các API Chính
-| Chức năng          | HTTP Method | Endpoint             | Yêu cầu |
-|--------------------|------------|----------------------|---------|
-| Lấy danh sách thú cưng | GET        | `/api/pets`          | Không |
-| Thêm thú cưng      | POST       | `/api/pets`          | Body JSON |
-| Cập nhật thú cưng  | PUT        | `/api/pets/{id}`     | Body JSON |
-| Xóa thú cưng       | DELETE     | `/api/pets/{id}`     | Không |
-| Đăng nhập         | POST       | `/api/auth/login`    | Body JSON |
+| Chức năng          | HTTP Method | Endpoint                  | Yêu cầu |
+|--------------------|------------|---------------------------|---------|
+| Lấy danh sách thú cưng | GET        | `products?skip=?&limit=?` | Không |
+| Thêm thú cưng      | POST       | `/admin/products`         | Body JSON |
+| Cập nhật thú cưng  | PUT        | `/admin/products/{id}`          | Body JSON |
+| Xóa thú cưng       | DELETE     | `/admin/products/{id}`          | Không |
+| Đăng nhập         | POST       | `/admin/login`         | Body JSON |
 
 ## Liên Hệ
 Nếu có thắc mắc hoặc cần hỗ trợ, vui lòng liên hệ [hunghung2k4123@gmail.com].
