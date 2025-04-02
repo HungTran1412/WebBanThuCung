@@ -20,18 +20,22 @@ public class Payment {
     @Column(name = "payment_id")
     Integer id;
 
-    @Column(name = "order_id")
-    String orderId;
+    @OneToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+    Order order;
 
-    @Column(name = "payment_date")
+    @Column(name = "payment_date", nullable = false)
     LocalDate paymentDate;
 
-    @Column(name = "total_amount")
+    @Column(name = "total_amount", nullable = false)
     BigDecimal totalAmount;
 
-    @Column(name = "payment_method")
+    @Column(name = "payment_method", nullable = false)
     String paymentMethod;
 
-    @Column(name = "payment_status")
+    @Column(name = "payment_status", nullable = false)
     String paymentStatus;
+
+    @Column(name = "transaction_id", unique = true)
+    String transactionId;
 }
