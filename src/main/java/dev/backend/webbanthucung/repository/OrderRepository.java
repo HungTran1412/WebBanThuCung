@@ -12,5 +12,4 @@ public interface OrderRepository extends JpaRepository<Order, String> {
     @Query(value = "SELECT TOP (1) o.order_id FROM [order] o WHERE o.order_id LIKE ('ORD' + ? + '%') ORDER BY o.order_id DESC",
             nativeQuery = true)
     String findLastOrderId(@Param("datePart") String datePart);
-
 }
