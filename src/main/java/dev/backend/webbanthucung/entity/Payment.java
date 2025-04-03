@@ -1,5 +1,6 @@
 package dev.backend.webbanthucung.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,7 +22,8 @@ public class Payment {
     Integer id;
 
     @OneToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+    @JsonIgnore
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id", nullable = false)
     Order order;
 
     @Column(name = "payment_date", nullable = false)
