@@ -3,7 +3,6 @@ package dev.backend.webbanthucung.controller;
 import dev.backend.webbanthucung.dto.request.AdminLoginRequest;
 import dev.backend.webbanthucung.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,15 +13,16 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+
     @PostMapping("/login")
     public boolean login(@RequestBody AdminLoginRequest request) {
-        if (adminService.login(request.getEmail(), request.getPassword())) {
-            ResponseEntity.ok("Đăng nhập thành công!");
-            return true;
-        } else {
-            ResponseEntity.status(401).body("Tài khoản hoặc mật khẩu không hợp lệ");
-            return false;
-        }
+        return adminService.login(request.getEmail(), request.getPassword());
     }
+
+
+
+//    public ResponseEntity<AuthenticationRespone> login(@RequestBody AdminLoginRequest request) {
+//        boolean isAuthenticated = adminService.login(request.getEmail(), request.getPassword());
+//    }
 }
 
