@@ -7,6 +7,7 @@
 - **Spring Boot** (Spring MVC, Spring Data JPA)
 - **Hibernate** (ORM)
 - **SQL Server** (Database)
+- **Spring Sercurity** (Encrypt password)
 - **Lombok** (Giảm boilerplate code)
 
 ## Cấu Trúc Dự Án
