@@ -13,7 +13,7 @@
 ## Cấu Trúc Dự Án
 ```
 WebBanThuCung/
-│── src/
+├── src/
 │   ├── main/
 │   │   ├── java/com/example/petshop/
 │   │   │   ├── controller/
@@ -21,10 +21,13 @@ WebBanThuCung/
 │   │   │   ├── repository/
 │   │   │   ├── service/
 │   │   │   ├── dto/
-│   │   ├── resources/
-│   │   │   ├── application.yaml
-│── pom.xml
-│── README.md
+│   │   │   │   ├── model/
+│   │   │   │   ├── request/
+│   │   │   │   ├── response/
+│   ├── resources/
+│   │   └── application.yaml
+├── pom.xml
+├── README.md
 ```
 
 ## Cài Đặt
