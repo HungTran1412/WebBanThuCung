@@ -34,29 +34,32 @@ public class StatisticsController {
         return statisticsService.getAllPayments();
     }
 
-    @GetMapping("/statistics/orderquantity")
+    @GetMapping("/order/orderquantity")
     public int getOrderQuantity() {
         return statisticsService.getOrderQuantity();
     }
 
-    @GetMapping("/statistics/today")
-    public Map<String, Integer> getTodayOrderQuantity() {
-        Map<String, Integer> map = new HashMap<>();
+    @GetMapping("/order/today")
+    public Map<String, Object> getTodayOrderQuantity() {
+        Map<String, Object> map = new HashMap<>();
         map.put("Số đơn", statisticsService.todayOrderQuantity());
+        map.put("Tổng tiền", statisticsService.totalAmountToday());
         return map;
     }
 
-    @GetMapping("/statistics/month")
-    public Map<String, Integer> getMonthOrderQuantity() {
-        Map<String, Integer> map = new HashMap<>();
+    @GetMapping("/order/month")
+    public Map<String, Object> getMonthOrderQuantity() {
+        Map<String, Object> map = new HashMap<>();
         map.put("Số đơn", statisticsService.thisMonthOrderQuantity());
+        map.put("Tổng tiền", statisticsService.totalAmountThisMonth());
         return map;
     }
 
-    @GetMapping("/statistics/year")
-    public Map<String, Integer> getYearOrderQuantity() {
-        Map<String, Integer> map = new HashMap<>();
+    @GetMapping("/order/year")
+    public Map<String, Object> getYearOrderQuantity() {
+        Map<String, Object> map = new HashMap<>();
         map.put("Số đơn", statisticsService.thisYearOrderQuantity());
+        map.put("Tổng tiền", statisticsService.totalAmountThisYear());
         return map;
     }
 }

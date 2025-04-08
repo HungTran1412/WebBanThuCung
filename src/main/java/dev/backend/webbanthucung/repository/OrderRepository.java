@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+
 @Repository
 public interface OrderRepository extends JpaRepository<Order, String> {
 
@@ -21,4 +23,13 @@ public interface OrderRepository extends JpaRepository<Order, String> {
 
     @Query(value = "SELECT COUNT(*) FROM [order] WHERE YEAR(order_date) = YEAR(GETDATE())", nativeQuery = true)
     int countOrdersThisYear();
+
+    @Query(value = "SELECT SUM(total_amount) FROM [order] WHERE order_date = CAST(GETDATE() AS DATE)", nativeQuery = true)
+    BigDecimal totalAmountToday();
+
+    @Query(value = "SELECT sum(total_amount) FROM [order] WHERE MONTH(order_date) = MONTH(GETDATE()) AND YEAR(order_date) = YEAR(GETDATE())", nativeQuery = true)
+    BigDecimal totalAmountThisMonth();
+
+    @Query(value = "SELECT sUm(total_amount) FROM [order] WHERE YEAR(order_date) = YEAR(GETDATE())", nativeQuery = true)
+    BigDecimal totalAmountThisYear();
 }

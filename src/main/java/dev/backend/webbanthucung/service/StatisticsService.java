@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,14 +43,26 @@ public class StatisticsService {
         return orderRepository.countOrdersToday();
     }
 
+    public BigDecimal totalAmountToday() {
+        return orderRepository.totalAmountToday();
+    }
+
     //ham dem so don hang trong thang
     public int thisMonthOrderQuantity() {
         return orderRepository.countOrdersThisMonth();
     }
 
+    public BigDecimal totalAmountThisMonth() {
+        return orderRepository.totalAmountThisMonth();
+    }
+
     //ham dem so luong don han trong nam
     public int thisYearOrderQuantity() {
         return orderRepository.countOrdersThisYear();
+    }
+
+    public BigDecimal totalAmountThisYear() {
+        return orderRepository.totalAmountThisYear();
     }
 
     //ham lay tat ca don hang da thanh toan
