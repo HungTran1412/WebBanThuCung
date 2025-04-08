@@ -106,7 +106,7 @@ public class OrderService {
     @Transactional
     public void cancelOrder(String orderId) {
         Optional<Order> order = orderRepository.findById(orderId);
-        if(order.isEmpty()) throw new RuntimeException("Không tìm thấy ID đơn hàng: " + orderId);
+        if (order.isEmpty()) throw new RuntimeException("Không tìm thấy ID đơn hàng: " + orderId);
 
         Order order1 = order.get();
 
@@ -146,5 +146,16 @@ public class OrderService {
         order.setStatus(request.getStatus());
 
         return orderRepository.save(order);
+    }
+
+    //Ham dem so luong don hang
+    public int getOrderQuantity() {
+        int quantity = 0;
+
+        for(Order order : orderRepository.findAll()) {
+            quantity ++;
+        }
+
+        return quantity;
     }
 }

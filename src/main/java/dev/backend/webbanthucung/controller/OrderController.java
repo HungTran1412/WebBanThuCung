@@ -58,4 +58,9 @@ public class OrderController {
         orderService.cancelOrder(orderId);
         return ResponseEntity.ok("Đã hủy đơn hàng thành công!");
     }
+
+    @GetMapping("/admin/orderquantity")
+    public int getOrderQuantity() {
+        return orderService.getOrderQuantity();
+    }
 }
