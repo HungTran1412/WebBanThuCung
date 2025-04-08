@@ -37,6 +37,21 @@ public class StatisticsService {
         return quantity;
     }
 
+    //Ham lay so luong don hang trong ngay
+    public int todayOrderQuantity() {
+        return orderRepository.countOrdersToday();
+    }
+
+    //ham dem so don hang trong thang
+    public int thisMonthOrderQuantity() {
+        return orderRepository.countOrdersThisMonth();
+    }
+
+    //ham dem so luong don han trong nam
+    public int thisYearOrderQuantity() {
+        return orderRepository.countOrdersThisYear();
+    }
+
     //ham lay tat ca don hang da thanh toan
     public List<PaymentRespone> getAllPayments() {
         List<Payment> payments = paymentRepository.findAll();
