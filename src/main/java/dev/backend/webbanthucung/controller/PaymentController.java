@@ -24,9 +24,4 @@ public class PaymentController {
         Payment payment = paymentService.processPayment(request.getOrderId(), request.getPaymentMethod());
         return ResponseEntity.ok(payment);
     }
-
-    @GetMapping("/getall")
-    public List<PaymentRespone> getAllPayment(){
-        return paymentService.getAllPayments();
-    }
 }

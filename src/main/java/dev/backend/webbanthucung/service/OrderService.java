@@ -148,14 +148,5 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    //Ham dem so luong don hang
-    public int getOrderQuantity() {
-        int quantity = 0;
 
-        for(Order order : orderRepository.findAll()) {
-            quantity ++;
-        }
-
-        return quantity;
-    }
 }

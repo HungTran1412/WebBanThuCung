@@ -53,21 +53,4 @@ public class PaymentService {
 
         return paymentRepository.save(payment);
     }
-
-    //ham lay tat ca don hang
-    public List<PaymentRespone> getAllPayments() {
-        List<Payment> payments = paymentRepository.findAll();
-
-        return payments.stream().map(payment -> new PaymentRespone(
-                Integer.parseInt(payment.getId().toString()),
-                payment.getOrder().getOrderId(),
-                payment.getPaymentDate(),
-                payment.getPaymentMethod(),
-                payment.getPaymentStatus(),
-                payment.getTotalAmount(),
-                payment.getTransactionId()
-                )).collect(Collectors.toList());
-    }
-
-    //ham lấy so luong don hang da thanh toan
 }
