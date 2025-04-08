@@ -3,6 +3,7 @@ package dev.backend.webbanthucung.controller;
 import dev.backend.webbanthucung.dto.respone.PaymentRespone;
 import dev.backend.webbanthucung.service.StatisticsService;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,20 +19,21 @@ import java.util.Objects;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @CrossOrigin(origins = "http://localhost:3000")
+@AllArgsConstructor
 @RequestMapping("/admin")
 @RestController
 public class StatisticsController {
     @Autowired
     StatisticsService statisticsService;
 
-    public StatisticsController(StatisticsService statisticsService) {
-        this.statisticsService = statisticsService;
-    }
-
-
     @GetMapping("/payments")
     public List<PaymentRespone> getAllPayment(){
         return statisticsService.getAllPayments();
+    }
+
+    @GetMapping("/contacts/quantity")
+    public int getQuantity(){
+        return statisticsService.getContactQuantity();
     }
 
     @GetMapping("/order/orderquantity")

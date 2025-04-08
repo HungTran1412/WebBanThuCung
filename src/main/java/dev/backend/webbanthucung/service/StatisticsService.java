@@ -1,8 +1,10 @@
 package dev.backend.webbanthucung.service;
 
 import dev.backend.webbanthucung.dto.respone.PaymentRespone;
+import dev.backend.webbanthucung.entity.Contact;
 import dev.backend.webbanthucung.entity.Order;
 import dev.backend.webbanthucung.entity.Payment;
+import dev.backend.webbanthucung.repository.ContactRepository;
 import dev.backend.webbanthucung.repository.OrderRepository;
 import dev.backend.webbanthucung.repository.PaymentRepository;
 import lombok.AccessLevel;
@@ -27,6 +29,9 @@ public class StatisticsService {
     @Autowired
     PaymentRepository paymentRepository;
 
+    @Autowired
+    ContactRepository contactRepository;
+
     //Ham dem so luong don hang
     public int getOrderQuantity() {
         int quantity = 0;
@@ -34,6 +39,15 @@ public class StatisticsService {
         for(Order order : orderRepository.findAll()) {
             quantity ++;
         }
+
+        return quantity;
+    }
+
+    //ham dem so luong lien he
+    public int getContactQuantity(){
+        int quantity = 0;
+
+        for(Contact contact : contactRepository.findAll()) quantity++;
 
         return quantity;
     }
