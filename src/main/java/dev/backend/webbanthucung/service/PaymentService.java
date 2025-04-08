@@ -1,5 +1,7 @@
 package dev.backend.webbanthucung.service;
 
+import dev.backend.webbanthucung.dto.respone.OrderRespone;
+import dev.backend.webbanthucung.dto.respone.PaymentRespone;
 import dev.backend.webbanthucung.entity.Order;
 import dev.backend.webbanthucung.entity.Payment;
 import dev.backend.webbanthucung.repository.OrderRepository;
@@ -14,6 +16,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -49,4 +53,21 @@ public class PaymentService {
 
         return paymentRepository.save(payment);
     }
+
+    //ham lay tat ca don hang
+    public List<PaymentRespone> getAllPayments() {
+        List<Payment> payments = paymentRepository.findAll();
+
+        return payments.stream().map(payment -> new PaymentRespone(
+                Integer.parseInt(payment.getId().toString()),
+                payment.getOrder().getOrderId(),
+                payment.getPaymentDate(),
+                payment.getPaymentMethod(),
+                payment.getPaymentStatus(),
+                payment.getTotalAmount(),
+                payment.getTransactionId()
+                )).collect(Collectors.toList());
+    }
+
+    //ham lấy so luong don hang da thanh toan
 }
