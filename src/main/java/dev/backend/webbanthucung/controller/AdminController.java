@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins = "http://localhost:3000") // Cho phép React truy cập
+@CrossOrigin(origins = "http://localhost:3000")
 public class AdminController {
 
     @Autowired

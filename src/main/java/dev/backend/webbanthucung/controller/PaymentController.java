@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/payments")
 public class PaymentController {
     @Autowired
