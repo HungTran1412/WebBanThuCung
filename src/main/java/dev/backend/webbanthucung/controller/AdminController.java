@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -17,9 +20,16 @@ public class AdminController {
     private AdminService adminService;
 
 
+//    @PostMapping("/login")
+//    public boolean login(@RequestBody AdminLoginRequest request) {
+//        return adminService.login(request.getEmail(), request.getPassword());
+//    }
+
     @PostMapping("/login")
-    public boolean login(@RequestBody AdminLoginRequest request) {
-        return adminService.login(request.getEmail(), request.getPassword());
+    public Map<String, Boolean>  login(@RequestBody AdminLoginRequest request){
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("code", adminService.login(request.getEmail(), request.getPassword()));
+        return map;
     }
 
     @PutMapping("/change-pass")
