@@ -8,8 +8,7 @@ import dev.backend.webbanthucung.entity.OrderDetail;
 import dev.backend.webbanthucung.entity.Product;
 import dev.backend.webbanthucung.repository.OrderDetailRepository;
 import dev.backend.webbanthucung.repository.OrderRepository;
-import dev.backend.webbanthucung.repository.ProductRepository;
-import dev.backend.webbanthucung.repository.PromotionRepository;
+import dev.backend.webbanthucung.repository.ProductsRepository;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +22,9 @@ import org.springframework.web.server.ResponseStatusException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -43,7 +40,7 @@ public class OrderService {
     OrderDetailRepository orderDetailRepository;
 
     @Autowired
-    ProductRepository productRepository;
+    ProductsRepository productRepository;
 
     public String generateOrderId() {
         //lay ngay hien tai

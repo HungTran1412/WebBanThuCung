@@ -10,8 +10,8 @@ import java.util.List;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PageProductDTO {
-    List<ProductDTO> product;
+public class PageProductsDTO {
+    List<ProductsDTO> product;
     Integer skip;
     Integer limit;
     Integer total;

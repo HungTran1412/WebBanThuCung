@@ -13,28 +13,34 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "product")
 public class Product {
     @Id
+    @Column(name = "product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="product_id")
-    Integer id;
+    private Integer id;
 
-    @Column(name ="name", columnDefinition = "NVARCHAR(255)")
-    String name;
+    @Column(name = "name", columnDefinition = "NVARCHAR(255)")
+    private String name;
 
-    @Column(name ="age")
-    Integer age;
+    @Column(name = "age")
+    private Integer age;
 
-    @Column(name ="price")
-    Integer price;
+    @Column(name = "price")
+    private Integer price;
 
-    @Column(name ="quantity")
-    Integer quantity;
+    @Column(name = "quantity")
+    private Integer quantity;
 
-    @Column(name="img")
-    String img;
+    @Column(name = "img")
+    private String img;
 
-    @Column(name ="description",columnDefinition = "NVARCHAR(255)")
-    String des;
+    @Column(name = "description", columnDefinition = "NVARCHAR(255)")
+    private String description;
 
-    @Column(name ="breed",columnDefinition = "NVARCHAR(10)")
-    String gender;
+    @Column(name = "breed", columnDefinition = "NVARCHAR(10)")
+    private String breed;
+
+    @Column(name = "color", columnDefinition = "NVARCHAR(50)")
+    private String color;
+
+    @Column(name = "size", columnDefinition = "NVARCHAR(50)")
+    private String size;
 }
