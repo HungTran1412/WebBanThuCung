@@ -19,6 +19,9 @@ public class Admin {
     @Column(name = "username",unique = true, nullable = false)
     String email;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     String password;
+
+    @Column(name = "img")
+    String img;
 }
