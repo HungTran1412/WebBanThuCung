@@ -215,6 +215,7 @@ public class ProductsServiceImpl implements ProductsService {
                 a.setColor(x.getColor());
                 a.setDescription(x.getDescription());
                 a.setQuantity(x.getQuantity());
+                a.setImg(x.getImg());
                 a.setSize(x.getSize());
                 listProductDTO.add(a);
             }
