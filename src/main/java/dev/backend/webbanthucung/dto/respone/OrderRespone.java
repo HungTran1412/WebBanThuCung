@@ -20,6 +20,7 @@ public class OrderRespone {
     String email;
     String phone;
     String address;
+    String note;
     BigDecimal totalAmount;
     String status;
 }

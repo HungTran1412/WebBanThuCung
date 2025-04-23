@@ -71,7 +71,7 @@ public class OrderService {
         order.setEmail(request.getEmail());
         order.setPhone(request.getPhone());
         order.setAddress(request.getAddress());
-
+        order.setNote(request.getNote());
         order.setOrderDate(LocalDate.now());
         order.setStatus("PENDING");
 
@@ -131,6 +131,7 @@ public class OrderService {
                 order.getEmail(),
                 order.getPhone(),
                 order.getAddress(),
+                order.getNote(),
                 order.getTotalAmount(),
                 order.getStatus()
         )).collect(Collectors.toList());

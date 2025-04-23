@@ -48,6 +48,9 @@ public class Order {
     @Column(name = "status")
     String status;
 
+    @Column(name = "note")
+    String note;
+
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     Payment payment;
 }

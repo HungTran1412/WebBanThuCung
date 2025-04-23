@@ -18,5 +18,6 @@ public class OrderRequest {
     String phone;
     String address;
     Double totalAmount;
+    String note;
     List<OrderDetailRequest> orderDetail;
 }
