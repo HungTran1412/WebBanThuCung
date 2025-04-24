@@ -6,7 +6,6 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @CrossOrigin(origins = "http://localhost:3000")
@@ -32,8 +30,10 @@ public class StatisticsController {
     }
 
     @GetMapping("/contacts/quantity")
-    public int getQuantity(){
-        return statisticsService.getContactQuantity();
+    public Map<String, Integer> getQuantity(){
+        Map<String, Integer>  map = new HashMap<>();
+        map.put("quantity", statisticsService.getContactQuantity());
+        return map;
     }
 
     @GetMapping("/order/orderquantity")
