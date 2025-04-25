@@ -3,9 +3,11 @@ package dev.backend.webbanthucung.controller;
 import dev.backend.webbanthucung.dto.model.AdminDTO;
 import dev.backend.webbanthucung.dto.request.AdminLoginRequest;
 import dev.backend.webbanthucung.dto.request.ChangePasswordRequest;
+import dev.backend.webbanthucung.dto.respone.LoginRespone;
 import dev.backend.webbanthucung.entity.Admin;
 import dev.backend.webbanthucung.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,10 +29,13 @@ public class AdminController {
 //    }
 
     @PostMapping("/login")
-    public Map<String, Boolean>  login(@RequestBody AdminLoginRequest request){
-        Map<String, Boolean> map = new HashMap<>();
-        map.put("code", adminService.login(request.getEmail(), request.getPassword()));
-        return map;
+    public ResponseEntity<?> login(@RequestBody AdminLoginRequest request) {
+        try {
+            LoginRespone response = adminService.login(request.getEmail(), request.getPassword());
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("code", "fail", "message", e.getMessage()));
+        }
     }
 
     @GetMapping("/getInfor/{id}")

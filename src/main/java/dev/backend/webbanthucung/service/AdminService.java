@@ -2,6 +2,7 @@ package dev.backend.webbanthucung.service;
 
 import dev.backend.webbanthucung.dto.model.AdminDTO;
 import dev.backend.webbanthucung.dto.request.AdminLoginRequest;
+import dev.backend.webbanthucung.dto.respone.LoginRespone;
 import dev.backend.webbanthucung.entity.Admin;
 import dev.backend.webbanthucung.repository.AdminRepository;
 import lombok.AccessLevel;
@@ -27,15 +28,19 @@ public class AdminService {
     PasswordEncoder passwordEncoder;
 
     //ham dang nhap
-    public boolean login(String email, String password) {
+    public LoginRespone login(String email, String password) {
         Admin admin = adminRepository.findByEmail(email);
 
-        if (admin == null) {
-            return false;
+        if(admin == null){
+            throw new RuntimeException("EMAIL IS NOT EXISTS");
         }
 
         passwordEncoder = new BCryptPasswordEncoder(10);
-        return passwordEncoder.matches(password, admin.getPassword());
+        if(passwordEncoder.matches(password,admin.getPassword())){
+            return new LoginRespone("success", admin.getId());
+        }
+
+        throw new RuntimeException("INCORRECT PASSWORD!");
     }
 
     //ham doi mat khau
