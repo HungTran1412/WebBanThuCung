@@ -42,6 +42,10 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
+    //lấy đơn hàng xuất cả list đơn hàng
+    @GetMapping("/admin/order-list")
+    public  List<OrderRespone> getAllOrdersList() {return orderService.getAllOrdersList();}
+
     //Lay don hang theo id
     @GetMapping("/admin/order/{orderId}")
     public Order getOrderById(@PathVariable("orderId") String orderId) {

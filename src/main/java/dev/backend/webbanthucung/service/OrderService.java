@@ -1,5 +1,6 @@
 package dev.backend.webbanthucung.service;
 
+import dev.backend.webbanthucung.dto.model.ProductInOrderDTO;
 import dev.backend.webbanthucung.dto.request.OrderRequest;
 import dev.backend.webbanthucung.dto.request.PendingOrderRequest;
 import dev.backend.webbanthucung.dto.respone.OrderRespone;
@@ -135,6 +136,43 @@ public class OrderService {
                 order.getTotalAmount(),
                 order.getStatus()
         )).collect(Collectors.toList());
+    }
+
+    public List<OrderRespone> getAllOrdersList(){
+        List<Order> orders = orderRepository.findAll();
+
+        return orders.stream().map(order -> {
+            List<ProductInOrderDTO> products = order.getOrderDetails().stream()
+                    .map(orderDetail -> {
+                        Product p = orderDetail.getProduct();
+                        return new ProductInOrderDTO(
+                                p.getId(),
+                                p.getName(),
+                                p.getAge(),
+                                p.getPrice(),
+                                p.getQuantity() == null ? null : String.valueOf(p.getQuantity()),
+                                p.getImg(),
+                                p.getDescription(),
+                                p.getBreed(),
+                                p.getColor(),
+                                p.getSize()
+                        );
+                    })
+                    .collect(Collectors.toList());
+
+            return new OrderRespone(
+                    order.getOrderId(),
+                    order.getOrderDate(),
+                    order.getFullName(),
+                    order.getEmail(),
+                    order.getPhone(),
+                    order.getAddress(),
+                    order.getNote(),
+                    order.getTotalAmount(),
+                    order.getStatus(),
+                    products
+            );
+        }).collect(Collectors.toList());
     }
 
     //Ham xu ly don hang
