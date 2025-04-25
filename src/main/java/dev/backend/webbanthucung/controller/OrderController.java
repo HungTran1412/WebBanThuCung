@@ -54,7 +54,7 @@ public class OrderController {
     }
 
     @DeleteMapping("/admin/order/{orderId}")
-    public ResponseEntity<String> deleteContact(@PathVariable("orderId") String orderId) {
+    public ResponseEntity<String> cancelOrder(@PathVariable("orderId") String orderId) {
         orderService.cancelOrder(orderId);
         return ResponseEntity.ok("Đã hủy đơn hàng thành công!");
     }
