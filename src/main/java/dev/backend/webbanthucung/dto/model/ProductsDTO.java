@@ -9,14 +9,14 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProductsDTO {
-    private Integer id;
-    private String name;
-    private Integer age;
-    private Integer price;
-    private String breed;
-    private String color;
-    private String size;
-    private Integer quantity;
-    private String img;
-    private String description;
+    Integer id;
+    String name;
+    Integer age;
+    Integer price;
+    String breed;
+    String color;
+    String size;
+    Integer quantity;
+    String img;
+    String description;
 }

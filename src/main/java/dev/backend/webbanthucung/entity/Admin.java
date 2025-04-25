@@ -24,4 +24,7 @@ public class Admin {
 
     @Column(name = "img")
     String img;
+
+    @Column(name = "fullname")
+    String fullname;
 }

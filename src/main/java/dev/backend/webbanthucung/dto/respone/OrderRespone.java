@@ -1,7 +1,6 @@
 package dev.backend.webbanthucung.dto.respone;
 
 import dev.backend.webbanthucung.dto.model.ProductInOrderDTO;
-import dev.backend.webbanthucung.entity.OrderDetail;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;

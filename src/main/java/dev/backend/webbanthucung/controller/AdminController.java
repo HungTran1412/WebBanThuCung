@@ -1,5 +1,6 @@
 package dev.backend.webbanthucung.controller;
 
+import dev.backend.webbanthucung.dto.model.AdminDTO;
 import dev.backend.webbanthucung.dto.request.AdminLoginRequest;
 import dev.backend.webbanthucung.dto.request.ChangePasswordRequest;
 import dev.backend.webbanthucung.entity.Admin;
@@ -30,6 +31,11 @@ public class AdminController {
         Map<String, Boolean> map = new HashMap<>();
         map.put("code", adminService.login(request.getEmail(), request.getPassword()));
         return map;
+    }
+
+    @GetMapping("/getInfor/{id}")
+    public AdminDTO getInforById(@PathVariable Long id){
+        return adminService.getInforById(id);
     }
 
     @PutMapping("/change-pass")

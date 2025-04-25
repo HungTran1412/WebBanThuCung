@@ -1,5 +1,6 @@
 package dev.backend.webbanthucung.service;
 
+import dev.backend.webbanthucung.dto.model.AdminDTO;
 import dev.backend.webbanthucung.dto.request.AdminLoginRequest;
 import dev.backend.webbanthucung.entity.Admin;
 import dev.backend.webbanthucung.repository.AdminRepository;
@@ -7,9 +8,11 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import static java.rmi.server.LogStream.log;
 
@@ -52,5 +55,12 @@ public class AdminService {
         admin.setPassword(passwordEncoder.encode(newPassword));
         adminRepository.save(admin);
         return true;
+    }
+
+    public AdminDTO getInforById(Long id) {
+        Admin admin = adminRepository.findById(id).orElseThrow(()
+                -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ID IS NOT EXIST:" + id));
+
+        return new AdminDTO(admin.getId(),admin.getEmail(), admin.getImg(), admin.getFullname());
     }
 }
