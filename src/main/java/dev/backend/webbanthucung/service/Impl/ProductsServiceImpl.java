@@ -79,6 +79,7 @@ public class ProductsServiceImpl implements ProductsService {
                 a.setId(x.getId());
                 a.setBreed(x.getBreed());
                 a.setColor(x.getColor());
+                a.setImg(x.getImg());
                 a.setDescription(x.getDescription());
                 a.setQuantity(x.getQuantity());
                 a.setSize(x.getSize());
@@ -100,6 +101,7 @@ public class ProductsServiceImpl implements ProductsService {
         proDTO.setBreed(pro.get().getBreed());
         proDTO.setColor(pro.get().getColor());
         proDTO.setSize(pro.get().getSize());
+        proDTO.setImg(pro.get().getImg());
         proDTO.setAge(pro.get().getAge());
         proDTO.setName(pro.get().getName());
         proDTO.setDescription(pro.get().getDescription());

@@ -10,11 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class ProductsController {
     @Autowired
     private ProductsService productService;
 
-    @CrossOrigin(origins = "http://127.0.0.1:5500", methods = { RequestMethod.GET, RequestMethod.POST })
+//    @CrossOrigin(origins = "http://127.0.0.1:5500", methods = { RequestMethod.GET, RequestMethod.POST })
     @GetMapping(value = "/products/")
     public PageProductsDTO testAPI(@RequestParam(value = "skip", required = false) Integer skip,
                                    @RequestParam(value = "limit", required = false) Integer limit,
