@@ -89,7 +89,7 @@ public class OrderService {
         //tính tổng tiền
         double totalPrice = 0;
         for (OrderDetail orderDetail : orderDetails) {
-            totalPrice += orderDetail.getPrice();
+            totalPrice += orderDetail.getPrice() *  orderDetail.getQuantity();
         }
 
         //Gán danh sách OrderDetail vào Order
