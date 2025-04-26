@@ -42,6 +42,13 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
+    //Sua thong tin don hang
+    @PutMapping("/admin/orders/{orderId}")
+    public ResponseEntity<Order> updateOrder(@PathVariable String orderId, @RequestBody OrderRequest request) {
+        Order updateOrder =  orderService.updateOrder(orderId, request);
+        return ResponseEntity.ok(updateOrder);
+    }
+
     //lấy đơn hàng xuất cả list đơn hàng
     @GetMapping("/admin/order-list")
     public  List<OrderRespone> getAllOrdersList() {return orderService.getAllOrdersList();}
