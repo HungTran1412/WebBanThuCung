@@ -126,34 +126,37 @@ public class OrderService {
     public Order updateOrder(String id, OrderRequest request) {
         Order order = getOrderById(id);
 
-        // Cập nhật thông tin cơ bản
+        // Cập nhật thông tin đơn hàng
         order.setFullName(request.getFullName());
         order.setEmail(request.getEmail());
         order.setPhone(request.getPhone());
         order.setAddress(request.getAddress());
         order.setNote(request.getNote());
 
-        order.getOrderDetails().clear();
+        // Nếu người dùng có gửi orderDetail mới lên
+        if (request.getOrderDetail() != null && !request.getOrderDetail().isEmpty()) {
+            // Xóa orderDetail cũ
+            orderDetailRepository.deleteByOrder(order);
 
-        // Thêm mới các sản phẩm
-        List<OrderDetail> orderDetails = request.getOrderDetail().stream()
-                .map(detail -> {
-                    Product product = productRepository.findById(detail.getProductId())
-                            .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm: " + detail.getProductId()));
-                    return new OrderDetail(order, product, 1, product.getPrice());
-                })
-                .collect(Collectors.toList());
+            // Tạo orderDetail mới
+            List<OrderDetail> orderDetails = request.getOrderDetail().stream().map(detail -> {
+                Product product = productRepository.findById(detail.getProductId())
+                        .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm: " + detail.getProductId()));
+                return new OrderDetail(order, product, 1, product.getPrice());
+            }).collect(Collectors.toList());
 
-        order.getOrderDetails().addAll(orderDetails);
+            order.setOrderDetails(orderDetails);
 
-        // Tính lại tổng tiền
-        double totalPrice = orderDetails.stream()
-                .mapToDouble(od -> od.getPrice() * od.getQuantity())
-                .sum();
-        order.setTotalAmount(BigDecimal.valueOf(totalPrice).setScale(2, RoundingMode.HALF_UP));
+            // Cập nhật lại tổng tiền
+            double totalPrice = orderDetails.stream()
+                    .mapToDouble(od -> od.getPrice() * od.getQuantity())
+                    .sum();
+            order.setTotalAmount(BigDecimal.valueOf(totalPrice).setScale(2, RoundingMode.HALF_UP));
+        }
 
         return orderRepository.save(order);
     }
+
 
 
     //Ham lay tat ca don hang

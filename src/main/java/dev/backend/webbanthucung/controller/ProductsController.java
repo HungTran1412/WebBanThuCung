@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class ProductsController {
@@ -48,16 +51,27 @@ public class ProductsController {
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/products/update/{id}")
+//    @PutMapping(value = "/products/update/{id}")
+    @PatchMapping(value = "/products/update/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable Integer id, @RequestBody Product product) {
         Product savedProduct = productService.updateProduct(id, product);
         return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
     }
+//
+//    @DeleteMapping(value = "/products/delete/{id}")
+//    public ResponseEntity<Void> deleteProduct(@PathVariable Integer id) {
+//        productService.deleteProduct(id);
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//
+//    }
+    @DeleteMapping("/products/delete/{id}")
+    public ResponseEntity<Map<String, String>> deleteProduct(@PathVariable Integer id) {
+    productService.deleteProduct(id);
 
-    @DeleteMapping(value = "/products/delete/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Integer id) {
-        productService.deleteProduct(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    Map<String, String> response = new HashMap<>();
+    response.put("code", "success");
 
-    }
+    return ResponseEntity.ok(response);
+}
+
 }

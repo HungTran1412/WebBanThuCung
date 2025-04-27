@@ -60,8 +60,8 @@ public class StatisticsController {
     @GetMapping("/order/year")
     public Map<String, Object> getYearOrderQuantity() {
         Map<String, Object> map = new HashMap<>();
-        map.put("Số đơn", statisticsService.thisYearOrderQuantity());
-        map.put("Tổng tiền", statisticsService.totalAmountThisYear());
+        map.put("orders", statisticsService.thisYearOrderQuantity());
+        map.put("total", statisticsService.totalAmountThisYear());
         return map;
     }
 }

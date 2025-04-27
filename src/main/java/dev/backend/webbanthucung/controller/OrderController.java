@@ -43,7 +43,7 @@ public class OrderController {
     }
 
     //Sua thong tin don hang
-    @PutMapping("/admin/orders/{orderId}")
+    @PatchMapping("/admin/orders/{orderId}")
     public ResponseEntity<Order> updateOrder(@PathVariable String orderId, @RequestBody OrderRequest request) {
         Order updateOrder =  orderService.updateOrder(orderId, request);
         return ResponseEntity.ok(updateOrder);
@@ -67,6 +67,6 @@ public class OrderController {
     @DeleteMapping("/admin/order/{orderId}")
     public ResponseEntity<String> cancelOrder(@PathVariable("orderId") String orderId) {
         orderService.cancelOrder(orderId);
-        return ResponseEntity.ok("Đã hủy đơn hàng thành công!");
+        return ResponseEntity.ok("true");
     }
 }
