@@ -11,6 +11,7 @@ import dev.backend.webbanthucung.repository.OrderDetailRepository;
 import dev.backend.webbanthucung.repository.OrderRepository;
 import dev.backend.webbanthucung.repository.ProductsRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.Email;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -42,6 +43,9 @@ public class OrderService {
 
     @Autowired
     ProductsRepository productRepository;
+
+    @Autowired
+    EmailService sendEmail;
 
     public String generateOrderId() {
         //lay ngay hien tai
@@ -95,6 +99,32 @@ public class OrderService {
         //Gán danh sách OrderDetail vào Order
         order.setOrderDetails(orderDetails);
         order.setTotalAmount(BigDecimal.valueOf(totalPrice).setScale(2, RoundingMode.HALF_UP));
+
+
+        //Duyệt danh sách
+        StringBuilder productsList = new StringBuilder();
+        for(OrderDetail detail : orderDetails) {
+            productsList.append("\n- ")
+                    .append(detail.getProduct().getName())
+                    .append(" (Số lượng: ")
+                    .append(detail.getQuantity())
+                    .append(", Đơn giá: ")
+                    .append(detail.getPrice())
+                    .append(")");
+        }
+
+        String subject = "Đặt hàng thành công!";
+        String body = "Quý khách vừa đặt đơn hàng:\n" +
+                "Mã đơn hàng: " + order.getOrderId()
+                + "\nHọ tên: " + order.getFullName()
+                + "\nSố điện thoại: " + order.getPhone()
+                + "\nEmail: " + order.getEmail()
+                + "\nĐịa chỉ: " + order.getAddress()
+                + "\nTổng tiền:" + totalPrice + "VND"
+                + "\nSản phẩm đã đặt:" + productsList.toString()
+                + "\n\nCảm ơn quý khách đã mua hàng tại cửa hàng chúng tôi!";
+
+        sendEmail.sendMail(order.getEmail(), subject, body);
 
         return orderRepository.save(order);
     }

@@ -20,7 +20,6 @@ import static java.rmi.server.LogStream.log;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Service
 public class AdminService {
-
     @Autowired
     AdminRepository adminRepository;
 

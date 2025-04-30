@@ -9,6 +9,16 @@ spring:
     username: sa
     password: 123456789
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: hunghung2k4123@gmail.com
+    password: hukm xrqg gsvw ihmi
+    properties:
+      mail:
+        auth: true
+        starttls:
+          enable: true
   jpa:
     hibernate:
       ddl-auto: update
@@ -23,6 +33,7 @@ spring:
     hibernate:
       format_sql: true
 
+#mk: hukm xrqg gsvw ihmi
 #  spring:
 #    datasource:
 #      url: "jdbc:mysql://localhost:3306/WebBanThuCung"
