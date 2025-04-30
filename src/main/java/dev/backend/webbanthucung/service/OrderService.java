@@ -99,7 +99,7 @@ public class OrderService {
         //Gán danh sách OrderDetail vào Order
         order.setOrderDetails(orderDetails);
         order.setTotalAmount(BigDecimal.valueOf(totalPrice).setScale(2, RoundingMode.HALF_UP));
-
+        String total = totalPrice + "";
 
         //Duyệt danh sách
         StringBuilder productsList = new StringBuilder();
@@ -120,7 +120,7 @@ public class OrderService {
                 + "\nSố điện thoại: " + order.getPhone()
                 + "\nEmail: " + order.getEmail()
                 + "\nĐịa chỉ: " + order.getAddress()
-                + "\nTổng tiền:" + totalPrice + "VND"
+                + "\nTổng tiền: " + total + " VND"
                 + "\nSản phẩm đã đặt:" + productsList.toString()
                 + "\n\nCảm ơn quý khách đã mua hàng tại cửa hàng chúng tôi!";
 
