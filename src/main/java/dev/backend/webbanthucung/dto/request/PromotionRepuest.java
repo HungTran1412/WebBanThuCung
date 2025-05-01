@@ -11,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 public class PromotionRepuest {
-    String id;
     String email;
+    String discountCode;
+    String status;
 }
