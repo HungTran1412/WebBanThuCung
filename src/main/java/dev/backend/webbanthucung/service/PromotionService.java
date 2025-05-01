@@ -19,6 +19,9 @@ public class PromotionService {
     @Autowired
     PromotionRepository promotionRepository;
 
+    @Autowired
+    EmailService sendEmail;
+
     static String generatePromotionCode(){
         String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder promotionCode = new StringBuilder();
@@ -35,9 +38,17 @@ public class PromotionService {
     public Promotion registerPromotion(PromotionRepuest request) {
         Promotion promotion = new Promotion();
 
+        String strCode = generatePromotionCode();
+
         promotion.setEmail(request.getEmail());
-        promotion.setDiscountCode(generatePromotionCode());
+        promotion.setDiscountCode(strCode);
         promotion.setStatus("AVAIABLE");
+
+        String subject = "Đăng ký khuyến mãi thành công!";
+        String body = "Mã khuyến mãi: " + strCode
+                + "\nCảm ơn quý khách đã sử dụng dịch vụ của chúng tôi";
+
+        sendEmail.sendMail(request.getEmail(), subject, body);
 
         return promotionRepository.save(promotion);
     }

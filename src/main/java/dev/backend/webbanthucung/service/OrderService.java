@@ -11,7 +11,6 @@ import dev.backend.webbanthucung.repository.OrderDetailRepository;
 import dev.backend.webbanthucung.repository.OrderRepository;
 import dev.backend.webbanthucung.repository.ProductsRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.Email;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
