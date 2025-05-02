@@ -7,9 +7,11 @@ import dev.backend.webbanthucung.dto.respone.OrderRespone;
 import dev.backend.webbanthucung.entity.Order;
 import dev.backend.webbanthucung.entity.OrderDetail;
 import dev.backend.webbanthucung.entity.Product;
+import dev.backend.webbanthucung.entity.Promotion;
 import dev.backend.webbanthucung.repository.OrderDetailRepository;
 import dev.backend.webbanthucung.repository.OrderRepository;
 import dev.backend.webbanthucung.repository.ProductsRepository;
+import dev.backend.webbanthucung.repository.PromotionRepository;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +44,9 @@ public class OrderService {
 
     @Autowired
     ProductsRepository productRepository;
+
+    @Autowired
+    PromotionRepository promotionRepository;
 
     @Autowired
     EmailService sendEmail;
@@ -79,6 +84,15 @@ public class OrderService {
         order.setOrderDate(LocalDate.now());
         order.setStatus("PENDING");
 
+        //Nếu có khuyến mãi
+        Promotion promotion = null;
+        if (request.getDiscountCode() != null && !request.getDiscountCode().isEmpty()) {
+            promotion = promotionRepository.findById(request.getDiscountCode())
+                    .orElseThrow(() -> new RuntimeException("Không tìm thấy mã khuyến mãi: " + request.getDiscountCode()));
+            order.setPromotion(promotion);
+            promotion.setOrder(order);
+        }
+
         //Tạo danh sách OrderDetail
         List<OrderDetail> orderDetails = request.getOrderDetail().stream().map(detail -> {
             Product product = productRepository.findById(detail.getProductId())
@@ -92,17 +106,26 @@ public class OrderService {
         //tính tổng tiền
         double totalPrice = 0;
         for (OrderDetail orderDetail : orderDetails) {
-            totalPrice += orderDetail.getPrice() *  orderDetail.getQuantity();
+            totalPrice += orderDetail.getPrice() * orderDetail.getQuantity();
+        }
+
+        //log.info("Khuyen mai: {}", promotion.getDiscountCode());
+
+        //Áp dụng khuyến mãi nếu có
+        BigDecimal totalAmount = BigDecimal.valueOf(totalPrice);
+        if (promotion != null && "AVAIABLE".equals(promotion.getStatus())) {
+            BigDecimal discountRate = new BigDecimal(0.1);
+            promotion.setStatus("UNAVAIABLE");
+            totalAmount = totalAmount.multiply(BigDecimal.ONE.subtract(discountRate));
         }
 
         //Gán danh sách OrderDetail vào Order
         order.setOrderDetails(orderDetails);
-        order.setTotalAmount(BigDecimal.valueOf(totalPrice).setScale(2, RoundingMode.HALF_UP));
-        String total = totalPrice + "";
+        order.setTotalAmount(totalAmount.setScale(2, RoundingMode.HALF_UP));
 
         //Duyệt danh sách
         StringBuilder productsList = new StringBuilder();
-        for(OrderDetail detail : orderDetails) {
+        for (OrderDetail detail : orderDetails) {
             productsList.append("\n- ")
                     .append(detail.getProduct().getName())
                     .append(" (Số lượng: ")
@@ -119,7 +142,7 @@ public class OrderService {
                 + "\nSố điện thoại: " + order.getPhone()
                 + "\nEmail: " + order.getEmail()
                 + "\nĐịa chỉ: " + order.getAddress()
-                + "\nTổng tiền: " + total + " VND"
+                + "\nTổng tiền: " + totalAmount.setScale(2, RoundingMode.HALF_UP) + " VND"
                 + "\nSản phẩm đã đặt:" + productsList.toString()
                 + "\n\nCảm ơn quý khách đã mua hàng tại cửa hàng chúng tôi!";
 
@@ -187,7 +210,6 @@ public class OrderService {
     }
 
 
-
     //Ham lay tat ca don hang
     public List<OrderRespone> getAllOrders() {
         List<Order> orders = orderRepository.findAll();
@@ -205,7 +227,7 @@ public class OrderService {
         )).collect(Collectors.toList());
     }
 
-    public List<OrderRespone> getAllOrdersList(){
+    public List<OrderRespone> getAllOrdersList() {
         List<Order> orders = orderRepository.findAll();
 
         return orders.stream().map(order -> {

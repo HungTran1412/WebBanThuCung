@@ -53,4 +53,8 @@ public class Order {
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     Payment payment;
+
+    @OneToOne
+    @JoinColumn(name = "discount_code", referencedColumnName = "discount_code")
+    Promotion promotion;
 }

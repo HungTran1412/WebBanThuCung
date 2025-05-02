@@ -10,13 +10,17 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "promotion")
 public class Promotion {
-    @Id
+
     @Column(name = "email")
     String email;
 
+    @Id
     @Column(name = "discount_code")
     String discountCode;
 
     @Column(name = "status")
     String status;
+
+    @OneToOne(mappedBy = "promotion")
+    Order order;
 }

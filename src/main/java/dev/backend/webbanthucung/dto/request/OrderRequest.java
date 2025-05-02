@@ -19,5 +19,6 @@ public class OrderRequest {
     String address;
     Double totalAmount;
     String note;
+    String discountCode;
     List<OrderDetailRequest> orderDetail;
 }
