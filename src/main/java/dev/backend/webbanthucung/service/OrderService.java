@@ -160,6 +160,13 @@ public class OrderService {
 
         Order order1 = order.get();
 
+        String subject = "Hủy đơn hàng thành công!";
+        String body = "Quý khách đã hủy thành công đơn hàng:" +
+                "\nMã đơn hàng: " + order1.getOrderId()
+                + "\n\nHân hạnh được phục vụ quý khách vào thời gian tới!";
+
+        sendEmail.sendMail(order1.getEmail(), subject, body);
+
         orderDetailRepository.deleteByOrder(order1);
 //        order1.setStatus("CANCELLED");
 //        orderRepository.save(order1);
