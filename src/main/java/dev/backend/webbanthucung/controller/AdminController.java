@@ -4,14 +4,12 @@ import dev.backend.webbanthucung.dto.model.AdminDTO;
 import dev.backend.webbanthucung.dto.request.AdminLoginRequest;
 import dev.backend.webbanthucung.dto.request.ChangePasswordRequest;
 import dev.backend.webbanthucung.dto.respone.LoginRespone;
-import dev.backend.webbanthucung.entity.Admin;
 import dev.backend.webbanthucung.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
