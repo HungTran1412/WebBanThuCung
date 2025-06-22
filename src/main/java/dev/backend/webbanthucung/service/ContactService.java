@@ -1,7 +1,7 @@
 package dev.backend.webbanthucung.service;
 
 import dev.backend.webbanthucung.dto.request.ContactRequest;
-import dev.backend.webbanthucung.entity.Contact;
+import dev.backend.webbanthucung.entities.Contact;
 
 import java.util.List;
 

@@ -1,8 +1,7 @@
 package dev.backend.webbanthucung.controller;
 
 import dev.backend.webbanthucung.dto.request.PromotionRepuest;
-import dev.backend.webbanthucung.entity.Promotion;
-import dev.backend.webbanthucung.service.Impl.PromotionServiceImpl;
+import dev.backend.webbanthucung.entities.Promotion;
 import dev.backend.webbanthucung.service.PromotionService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;

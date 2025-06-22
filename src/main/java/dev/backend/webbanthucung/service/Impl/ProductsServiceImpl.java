@@ -3,7 +3,7 @@ package dev.backend.webbanthucung.service.Impl;
 import dev.backend.webbanthucung.dto.model.PageProductsDTO;
 import dev.backend.webbanthucung.dto.model.ProductDetail;
 import dev.backend.webbanthucung.dto.model.ProductsDTO;
-import dev.backend.webbanthucung.entity.Product;
+import dev.backend.webbanthucung.entities.Product;
 import dev.backend.webbanthucung.repository.ProductsRepository;
 import dev.backend.webbanthucung.repository.custom.specification.ProductSpecification;
 import dev.backend.webbanthucung.service.ProductsService;

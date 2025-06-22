@@ -1,7 +1,7 @@
 package dev.backend.webbanthucung.service.Impl;
 
 import dev.backend.webbanthucung.dto.request.PromotionRepuest;
-import dev.backend.webbanthucung.entity.Promotion;
+import dev.backend.webbanthucung.entities.Promotion;
 import dev.backend.webbanthucung.repository.PromotionRepository;
 import dev.backend.webbanthucung.service.EmailService;
 import dev.backend.webbanthucung.service.PromotionService;

@@ -2,7 +2,7 @@ package dev.backend.webbanthucung.service.Impl;
 
 import dev.backend.webbanthucung.dto.model.AdminDTO;
 import dev.backend.webbanthucung.dto.respone.LoginRespone;
-import dev.backend.webbanthucung.entity.Admin;
+import dev.backend.webbanthucung.entities.Admin;
 import dev.backend.webbanthucung.repository.AdminRepository;
 import dev.backend.webbanthucung.service.AdminService;
 import lombok.AccessLevel;

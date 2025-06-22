@@ -1,7 +1,7 @@
 package dev.backend.webbanthucung.service.Impl;
 
-import dev.backend.webbanthucung.entity.Order;
-import dev.backend.webbanthucung.entity.Payment;
+import dev.backend.webbanthucung.entities.Order;
+import dev.backend.webbanthucung.entities.Payment;
 import dev.backend.webbanthucung.repository.OrderRepository;
 import dev.backend.webbanthucung.repository.PaymentRepository;
 import dev.backend.webbanthucung.service.PaymentService;

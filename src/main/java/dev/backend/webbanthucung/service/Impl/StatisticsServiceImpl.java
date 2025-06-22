@@ -1,9 +1,9 @@
 package dev.backend.webbanthucung.service.Impl;
 
 import dev.backend.webbanthucung.dto.respone.PaymentRespone;
-import dev.backend.webbanthucung.entity.Contact;
-import dev.backend.webbanthucung.entity.Order;
-import dev.backend.webbanthucung.entity.Payment;
+import dev.backend.webbanthucung.entities.Contact;
+import dev.backend.webbanthucung.entities.Order;
+import dev.backend.webbanthucung.entities.Payment;
 import dev.backend.webbanthucung.repository.ContactRepository;
 import dev.backend.webbanthucung.repository.OrderRepository;
 import dev.backend.webbanthucung.repository.PaymentRepository;

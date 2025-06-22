@@ -1,7 +1,7 @@
 package dev.backend.webbanthucung.service.Impl;
 
 import dev.backend.webbanthucung.dto.request.ContactRequest;
-import dev.backend.webbanthucung.entity.Contact;
+import dev.backend.webbanthucung.entities.Contact;
 import dev.backend.webbanthucung.repository.ContactRepository;
 import dev.backend.webbanthucung.service.ContactService;
 import lombok.AccessLevel;

@@ -1,4 +1,4 @@
-package dev.backend.webbanthucung.entity;
+package dev.backend.webbanthucung.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

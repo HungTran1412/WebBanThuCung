@@ -2,7 +2,7 @@ package dev.backend.webbanthucung.controller;
 
 import dev.backend.webbanthucung.dto.model.PageProductsDTO;
 import dev.backend.webbanthucung.dto.model.ProductDetail;
-import dev.backend.webbanthucung.entity.Product;
+import dev.backend.webbanthucung.entities.Product;
 import dev.backend.webbanthucung.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

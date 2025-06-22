@@ -3,7 +3,7 @@ package dev.backend.webbanthucung.service;
 import dev.backend.webbanthucung.dto.request.OrderRequest;
 import dev.backend.webbanthucung.dto.request.PendingOrderRequest;
 import dev.backend.webbanthucung.dto.respone.OrderRespone;
-import dev.backend.webbanthucung.entity.Order;
+import dev.backend.webbanthucung.entities.Order;
 
 import java.util.List;
 

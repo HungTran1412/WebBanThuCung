@@ -1,6 +1,6 @@
 package dev.backend.webbanthucung.repository.custom.specification;
 
-import dev.backend.webbanthucung.entity.Product;
+import dev.backend.webbanthucung.entities.Product;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 

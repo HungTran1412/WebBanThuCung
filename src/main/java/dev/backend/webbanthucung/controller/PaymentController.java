@@ -1,8 +1,7 @@
 package dev.backend.webbanthucung.controller;
 
 import dev.backend.webbanthucung.dto.request.PaymentRequest;
-import dev.backend.webbanthucung.entity.Payment;
-import dev.backend.webbanthucung.service.Impl.PaymentServiceImpl;
+import dev.backend.webbanthucung.entities.Payment;
 import dev.backend.webbanthucung.service.PaymentService;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;

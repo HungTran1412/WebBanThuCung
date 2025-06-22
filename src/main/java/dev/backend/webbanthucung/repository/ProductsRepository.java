@@ -1,6 +1,6 @@
 package dev.backend.webbanthucung.repository;
 
-import dev.backend.webbanthucung.entity.Product;
+import dev.backend.webbanthucung.entities.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
